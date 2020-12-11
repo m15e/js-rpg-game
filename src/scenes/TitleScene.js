@@ -74,6 +74,5 @@ export default class TitleScene extends Phaser.Scene {
       gameObjects[0].setTexture('blueButton1');
     });
 
-
   }
 };
