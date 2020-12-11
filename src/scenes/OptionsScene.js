@@ -34,4 +34,18 @@ export default class OptionsScene extends Phaser.Scene {
 
     this.updateAudio();
   }
+
+  updateAudio() {
+    if (this.musicOn === false) {
+      this.musicButton.setTexture('box');
+    } else {
+      this.musicButton.setTexture('checkedBox');
+    }
+
+    if (this.soundOn === false) {
+      this.soundButton.setTexture('box');
+    } else {
+      this.soundButton.setTexture('checkedBox');
+    }
+  }
 };
