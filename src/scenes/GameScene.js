@@ -22,28 +22,28 @@ export default class GameScene extends Phaser.Scene {
     //  animation with key 'left', we don't need left and right as we will use one and flip the sprite
     this.anims.create({
       key: 'left',
-      frames: this.anims.generateFrameNumbers('player', { frames: [1, 7, 1, 13] }),
-      frameRate: 10,
+      frames: this.anims.generateFrameNumbers('player', { frames: [1, 2, 7, 8] }),
+      frameRate: 8,
       repeat: -1
     });
 
     // animation with key 'right'
     this.anims.create({
       key: 'right',
-      frames: this.anims.generateFrameNumbers('player', { frames: [1, 7, 1, 13] }),
-      frameRate: 10,
+      frames: this.anims.generateFrameNumbers('player', { frames: [1, 6, 7, 8] }),
+      frameRate: 8,
       repeat: -1
     });
     this.anims.create({
       key: 'up',
-      frames: this.anims.generateFrameNumbers('player', { frames: [2, 8, 2, 14] }),
-      frameRate: 10,
+      frames: this.anims.generateFrameNumbers('player', { frames: [1, 2, 3, 4] }),
+      frameRate: 8,
       repeat: -1
     });
     this.anims.create({
       key: 'down',
-      frames: this.anims.generateFrameNumbers('player', { frames: [0, 6, 0, 12] }),
-      frameRate: 10,
+      frames: this.anims.generateFrameNumbers('player', { frames: [5, 6, 7, 8] }),
+      frameRate: 8,
       repeat: -1
     });
 
@@ -68,7 +68,7 @@ export default class GameScene extends Phaser.Scene {
 
     // where the enemies will be
     this.spawns = this.physics.add.group({ classType: Phaser.GameObjects.Zone });
-    for (var i = 0; i < 30; i++) {
+    for (var i = 0; i < 2; i++) {
       var x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
       var y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
       // parameters are x, y, width, height
@@ -137,4 +137,4 @@ export default class GameScene extends Phaser.Scene {
       this.player.anims.stop();
     }
   }
-};
+}; 
