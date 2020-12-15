@@ -207,12 +207,12 @@ var BootScene = new Phaser.Class({
   preload() {
     // load the resources here
     // map tiles
-    this.load.image('tiles', 'src/assets/map/spritesheet.png');
+    //this.load.image('tiles', 'src/assets/map/spritesheet.png');
 
-    //map in json format
-    this.load.tilemapTiledJSON('map', 'src/assets/map/map.json');
+    // map in json format
+    //this.load.tilemapTiledJSON('map', 'src/assets/map/map.json');
 
-    //our two characters
+    // our two characters
     //this.load.spritesheet('player', 'src/assets/RPG_assets.png', { frameWidth: 16, frameHeight: 16 });
 
     // load resources
@@ -295,123 +295,6 @@ const BattleScene = new Phaser.Class({
   },
 });
 
-// var UIScene = new Phaser.Class({
-
-//   Extends: Phaser.Scene,
-
-//   initialize:
-
-//     function UIScene() {
-//       Phaser.Scene.call(this, { key: 'UIScene' });
-//     },
-
-//   create() {
-//     this.graphics = this.add.graphics();
-//     this.graphics.lineStyle(1, 0xffffff);
-//     this.graphics.fillStyle(0x031f4c, 1);
-//     this.graphics.strokeRect(2, 150, 90, 100);
-//     this.graphics.fillRect(2, 150, 90, 100);
-//     this.graphics.strokeRect(95, 150, 90, 100);
-//     this.graphics.fillRect(95, 150, 90, 100);
-//     this.graphics.strokeRect(188, 150, 130, 100);
-//     this.graphics.fillRect(188, 150, 130, 100);
-
-//     // basic container to hold all menus
-//     this.menus = this.add.container();
-
-//     this.heroesMenu = new HeroesMenu(195, 153, this);
-//     this.actionsMenu = new ActionsMenu(100, 153, this);
-//     this.enemiesMenu = new EnemiesMenu(8, 153, this);
-
-//     // the currently selected menu 
-//     this.currentMenu = this.actionsMenu;
-
-//     // add menus to the container
-//     this.menus.add(this.heroesMenu);
-//     this.menus.add(this.actionsMenu);
-//     this.menus.add(this.enemiesMenu);
-
-//     this.battleScene = this.scene.get('BattleScene')
-
-//     this.remapHeroes()
-//     this.remapEnemies()
-
-//     this.input.keyboard.on('keydown', this.onKeyInput, this)
-//     this.battleScene.events.on('PlayerSelect', this.onPlayerSelect, this)
-
-//     this.events.on('SelectEnemies', this.onSelectEnemies, this)
-//     this.events.on("Enemy", this.onEnemy, this)
-//     this.battleScene.nextTurn()
-//     this.message = new Message(this, this.battleScene.events);
-//     this.add.existing(this.message);
-//   },
-//   onEnemy: function (index) {
-//     this.heroesMenu.deselect();
-//     this.actionsMenu.deselect();
-//     this.enemiesMenu.deselect();
-//     this.currentMenu = null;
-//     this.battleScene.receivePlayerSelection('attack', index);
-//   },
-//   onSelectEnemies: function () {
-//     this.currentMenu = this.enemiesMenu;
-//     this.enemiesMenu.select(0);
-//   },
-//   remapHeroes: function () {
-//     var heroes = this.battleScene.heroes;
-//     this.heroesMenu.remap(heroes);
-//   },
-//   remapEnemies: function () {
-//     var enemies = this.battleScene.enemies;
-//     this.enemiesMenu.remap(enemies);
-//   },
-//   onKeyInput: function (event) {
-//     if (this.currentMenu) {
-//       if (event.code === "ArrowUp") {
-//         this.currentMenu.moveSelectionUp();
-//       } else if (event.code === "ArrowDown") {
-//         this.currentMenu.moveSelectionDown();
-//       } else if (event.code === "ArrowRight" || event.code === "Shift") {
-
-//       } else if (event.code === "Space" || event.code === "ArrowLeft") {
-//         this.currentMenu.confirm();
-//       }
-//     }
-//   },
-//   onPlayerSelect: function (id) {
-//     this.heroesMenu.select(id);
-//     this.actionsMenu.select(0);
-//     this.currentMenu = this.actionsMenu;
-//   },
-// });
-
-
-var OBattleScene = new Phaser.Class({
-
-  Extends: Phaser.Scene,
-
-  initialize:
-
-    function BattleScene() {
-      Phaser.Scene.call(this, { key: 'BattleScene' });
-    },
-  create: function () {
-    // set the background of the main scene green
-    this.cameras.main.setBackgroundColor('rgba(0, 200, 0, 0.5)');
-    // Run UI Scene at the same time
-    this.scene.run('UIScene');
-    var timeEvent = this.time.addEvent({ delay: 2000, callback: this.exitBattle, callbackScope: this });
-    this.sys.events.on('wake', this.wake, this);
-  },
-  exitBattle: function () {
-    this.scene.sleep('UIScene');
-    this.scene.switch('WorldScene');
-  },
-  wake: function () {
-    this.scene.run('UIScene');
-    this.time.addEvent({ delay: 2000, callback: this.exitBattle, callbackScope: this });
-  },
-});
-
 var UIScene = new Phaser.Class({
 
   Extends: Phaser.Scene,
@@ -422,7 +305,7 @@ var UIScene = new Phaser.Class({
       Phaser.Scene.call(this, { key: 'UIScene' });
     },
 
-  create: function () {
+  create() {
     this.graphics = this.add.graphics();
     this.graphics.lineStyle(1, 0xffffff);
     this.graphics.fillStyle(0x031f4c, 1);
@@ -432,7 +315,73 @@ var UIScene = new Phaser.Class({
     this.graphics.fillRect(95, 150, 90, 100);
     this.graphics.strokeRect(188, 150, 130, 100);
     this.graphics.fillRect(188, 150, 130, 100);
-  }
+
+    // basic container to hold all menus
+    this.menus = this.add.container();
+
+    this.heroesMenu = new HeroesMenu(195, 153, this);
+    this.actionsMenu = new ActionsMenu(100, 153, this);
+    this.enemiesMenu = new EnemiesMenu(8, 153, this);
+
+    // the currently selected menu 
+    this.currentMenu = this.actionsMenu;
+
+    // add menus to the container
+    this.menus.add(this.heroesMenu);
+    this.menus.add(this.actionsMenu);
+    this.menus.add(this.enemiesMenu);
+
+    this.battleScene = this.scene.get('BattleScene')
+
+    this.remapHeroes()
+    this.remapEnemies()
+
+    this.input.keyboard.on('keydown', this.onKeyInput, this)
+    this.battleScene.events.on('PlayerSelect', this.onPlayerSelect, this)
+
+    this.events.on('SelectEnemies', this.onSelectEnemies, this)
+    this.events.on("Enemy", this.onEnemy, this)
+    this.battleScene.nextTurn()
+    this.message = new Message(this, this.battleScene.events);
+    this.add.existing(this.message);
+  },
+  onEnemy: function (index) {
+    this.heroesMenu.deselect();
+    this.actionsMenu.deselect();
+    this.enemiesMenu.deselect();
+    this.currentMenu = null;
+    this.battleScene.receivePlayerSelection('attack', index);
+  },
+  onSelectEnemies: function () {
+    this.currentMenu = this.enemiesMenu;
+    this.enemiesMenu.select(0);
+  },
+  remapHeroes: function () {
+    var heroes = this.battleScene.heroes;
+    this.heroesMenu.remap(heroes);
+  },
+  remapEnemies: function () {
+    var enemies = this.battleScene.enemies;
+    this.enemiesMenu.remap(enemies);
+  },
+  onKeyInput: function (event) {
+    if (this.currentMenu) {
+      if (event.code === "ArrowUp") {
+        this.currentMenu.moveSelectionUp();
+      } else if (event.code === "ArrowDown") {
+        this.currentMenu.moveSelectionDown();
+      } else if (event.code === "ArrowRight" || event.code === "Shift") {
+
+      } else if (event.code === "Space" || event.code === "ArrowLeft") {
+        this.currentMenu.confirm();
+      }
+    }
+  },
+  onPlayerSelect: function (id) {
+    this.heroesMenu.select(id);
+    this.actionsMenu.select(0);
+    this.currentMenu = this.actionsMenu;
+  },
 });
 
 var WorldScene = new Phaser.Class({
@@ -512,17 +461,19 @@ var WorldScene = new Phaser.Class({
       this.spawns.create(x, y, 20, 20);
     }
     this.physics.add.overlap(this.player, this.spawns, this.onMeetEnemy, false, this);
-  },
-  onMeetEnemy: function (player, zone) {
-    // we move the zone to some other location
-    zone.x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
-    zone.y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
 
-    // shake the world
-    this.cameras.main.shake(300);
+    onMeetEnemy: (player, zone) => {
 
-    // switch to BattleScene
-    this.scene.switch('BattleScene');
+      zone.x = Phaser.Math.RND.between(0, this.physics.world.bounds.width)
+      zone.y = Phaser.Math.RND.between(0, this.physics.world.bounds.height)
+
+      // shake the world
+      this.cameras.main.shake(300)
+
+      // start battle
+      createHtmlTagObject.scene.switch('BattleScene')
+
+    }
   },
 
   update(time, delta) {
