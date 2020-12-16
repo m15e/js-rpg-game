@@ -22,7 +22,7 @@ export default class GameScene extends Phaser.Scene {
     //  animation with key 'left', we don't need left and right as we will use one and flip the sprite
     this.anims.create({
       key: 'left',
-      frames: this.anims.generateFrameNumbers('player', { frames: [1, 2, 7, 8] }),
+      frames: this.anims.generateFrameNumbers('player', { frames: [0, 1, 2, 3, 4, 5] }),
       frameRate: 8,
       repeat: -1
     });
@@ -30,7 +30,7 @@ export default class GameScene extends Phaser.Scene {
     // animation with key 'right'
     this.anims.create({
       key: 'right',
-      frames: this.anims.generateFrameNumbers('player', { frames: [1, 6, 7, 8] }),
+      frames: this.anims.generateFrameNumbers('player', { frames: [0, 1, 2, 3, 4, 5] }),
       frameRate: 8,
       repeat: -1
     });
@@ -48,7 +48,7 @@ export default class GameScene extends Phaser.Scene {
     });
 
     // our player sprite created through the phycis system
-    this.player = this.physics.add.sprite(50, 100, 'player', 6);
+    this.player = this.physics.add.sprite(30, 30, 'player', 1);
 
     // don't go out of the map
     this.physics.world.bounds.width = map.widthInPixels;
