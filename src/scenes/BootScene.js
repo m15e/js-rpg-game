@@ -19,6 +19,10 @@ export default class BootScene extends Phaser.Scene {
 
     // swords
     this.load.image('sword', 'src/assets/swordquest.png');
+
+    // dragons
+    this.load.image('dragonblue', 'src/assets/dragonblue.png')
+    this.load.image('dragonorrange', 'src/assets/dragonorrange.png')
   }
 
   create() {

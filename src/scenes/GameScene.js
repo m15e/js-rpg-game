@@ -98,15 +98,15 @@ export default class GameScene extends Phaser.Scene {
     gameState.swords = 0
     gameState.dragons = 0
 
-    this.dragonScore = this.add.text(this.physics.world.bounds.width - 140, 5, `Dragons Slayn: ${gameState.dragons}`, {
-      font: '15px Arial',
+    this.dragonScore = this.add.text(this.physics.world.bounds.width / 2 - 25, 5, `Dragons Slayn: ${gameState.dragons}`, {
+      font: '10px Arial',
       fill: '#ffffff',
       padding: { x: 10, y: 10 },
 
     }).setScrollFactor(0)
 
-    this.swordPower = this.add.text(this.physics.world.bounds.width - 140, 25, `Power Swords: ${gameState.swords}`, {
-      font: '15px Arial',
+    this.swordPower = this.add.text(this.physics.world.bounds.width / 2 - 25, 25, `Power Swords: ${gameState.swords}`, {
+      font: '10px Arial',
       fill: '#ffffff',
       padding: { x: 10, y: 10 },
 

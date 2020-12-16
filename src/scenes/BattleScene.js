@@ -2,7 +2,7 @@ import 'phaser';
 import gameState from '../state/GameState'
 
 // base class for heroes and enemies
-var Unit = new Phaser.Class({
+let Unit = new Phaser.Class({
   Extends: Phaser.GameObjects.Sprite,
 
   initialize:
@@ -11,7 +11,7 @@ var Unit = new Phaser.Class({
       Phaser.GameObjects.Sprite.call(this, scene, x, y, texture, frame)
       this.type = type;
       this.maxHp = this.hp = hp;
-      this.damage = damage; // default damage     
+      this.damage = gameState.damage; // default damage     
       this.living = true;
       this.menuItem = null;
     },
@@ -38,7 +38,7 @@ var Unit = new Phaser.Class({
   }
 });
 
-var Enemy = new Phaser.Class({
+let Enemy = new Phaser.Class({
   Extends: Unit,
 
   initialize:
@@ -47,7 +47,7 @@ var Enemy = new Phaser.Class({
     }
 });
 
-var PlayerCharacter = new Phaser.Class({
+let PlayerCharacter = new Phaser.Class({
   Extends: Unit,
 
   initialize:
@@ -58,153 +58,6 @@ var PlayerCharacter = new Phaser.Class({
 
       this.setScale(2);
     }
-});
-
-var MenuItem = new Phaser.Class({
-  Extends: Phaser.GameObjects.Text,
-
-  initialize:
-
-    function MenuItem(x, y, text, scene) {
-      Phaser.GameObjects.Text.call(this, scene, x, y, text, { color: "#ffffff", align: "left", fontSize: 15 });
-    },
-
-  select: function () {
-    this.setColor("#f8ff38");
-  },
-
-  deselect: function () {
-    this.setColor("#ffffff");
-  },
-  // when the associated enemy or player unit is killed
-  unitKilled: function () {
-    this.active = false;
-    this.visible = false;
-  }
-
-});
-
-// base menu class, container for menu items
-var Menu = new Phaser.Class({
-  Extends: Phaser.GameObjects.Container,
-
-  initialize:
-
-    function Menu(x, y, scene, heroes) {
-      Phaser.GameObjects.Container.call(this, scene, x, y);
-      this.menuItems = [];
-      this.menuItemIndex = 0;
-      this.x = x;
-      this.y = y;
-      this.selected = false;
-    },
-  addMenuItem: function (unit) {
-    var menuItem = new MenuItem(0, this.menuItems.length * 20, unit, this.scene);
-    this.menuItems.push(menuItem);
-    this.add(menuItem);
-    return menuItem;
-  },
-  // menu navigation 
-  moveSelectionUp: function () {
-    this.menuItems[this.menuItemIndex].deselect();
-    do {
-      this.menuItemIndex--;
-      if (this.menuItemIndex < 0)
-        this.menuItemIndex = this.menuItems.length - 1;
-    } while (!this.menuItems[this.menuItemIndex].active);
-    this.menuItems[this.menuItemIndex].select();
-  },
-  moveSelectionDown: function () {
-    this.menuItems[this.menuItemIndex].deselect();
-    do {
-      this.menuItemIndex++;
-      if (this.menuItemIndex >= this.menuItems.length)
-        this.menuItemIndex = 0;
-    } while (!this.menuItems[this.menuItemIndex].active);
-    this.menuItems[this.menuItemIndex].select();
-  },
-  // select the menu as a whole and highlight the choosen element
-  select: function (index) {
-    if (!index)
-      index = 0;
-    this.menuItems[this.menuItemIndex].deselect();
-    this.menuItemIndex = index;
-    while (!this.menuItems[this.menuItemIndex].active) {
-      this.menuItemIndex++;
-      if (this.menuItemIndex >= this.menuItems.length)
-        this.menuItemIndex = 0;
-      if (this.menuItemIndex == index)
-        return;
-    }
-    this.menuItems[this.menuItemIndex].select();
-    this.selected = true;
-  },
-  // deselect this menu
-  deselect: function () {
-    this.menuItems[this.menuItemIndex].deselect();
-    this.menuItemIndex = 0;
-    this.selected = false;
-  },
-  confirm: function () {
-    // when the player confirms his slection, do the action
-  },
-  // clear menu and remove all menu items
-  clear: function () {
-    for (var i = 0; i < this.menuItems.length; i++) {
-      this.menuItems[i].destroy();
-    }
-    this.menuItems.length = 0;
-    this.menuItemIndex = 0;
-  },
-  // recreate the menu items
-  remap: function (units) {
-    this.clear();
-    for (var i = 0; i < units.length; i++) {
-      var unit = units[i];
-      unit.setMenuItem(this.addMenuItem(unit.type));
-    }
-    this.menuItemIndex = 0;
-  }
-});
-
-var HeroesMenu = new Phaser.Class({
-  Extends: Menu,
-
-  initialize:
-
-    function HeroesMenu(x, y, scene) {
-      Menu.call(this, x, y, scene);
-    }
-});
-
-var ActionsMenu = new Phaser.Class({
-  Extends: Menu,
-
-  initialize:
-
-    function ActionsMenu(x, y, scene) {
-      Menu.call(this, x, y, scene);
-      this.addMenuItem("Attack");
-    },
-  confirm: function () {
-    // we select an action and go to the next menu and choose from the enemies to apply the action
-    this.scene.events.emit("SelectedAction");
-  }
-
-});
-
-var EnemiesMenu = new Phaser.Class({
-  Extends: Menu,
-
-  initialize:
-
-    function EnemiesMenu(x, y, scene) {
-      Menu.call(this, x, y, scene);
-    },
-  confirm: function () {
-    // the player has selected the enemy and we send its id with the event
-    this.scene.events.emit("Enemy", this.menuItemIndex);
-  }
 });
 
 export default class GameScene extends Phaser.Scene {
@@ -222,17 +75,17 @@ export default class GameScene extends Phaser.Scene {
 
   startBattle() {
     // player character - warrior
-    var warrior = new PlayerCharacter(this, 250, 50, "player", 1, "Warrior", 100, 20);
+    let warrior = new PlayerCharacter(this, 250, 50, "player", 1, "Warrior", 100, 20);
     this.add.existing(warrior);
 
     // player character - mage
-    var mage = new PlayerCharacter(this, 250, 100, "player", 4, "Mage", 80, 8);
+    let mage = new PlayerCharacter(this, 250, 100, "player", 4, "Mage", 80, 8);
     this.add.existing(mage);
 
-    var dragonblue = new Enemy(this, 50, 50, "dragonblue", null, "Dragon", 50, 3);
+    let dragonblue = new Enemy(this, 50, 50, "dragonblue", null, "Dragon", 50, 3);
     this.add.existing(dragonblue);
 
-    var dragonOrange = new Enemy(this, 50, 100, "dragonorrange", null, "Dragon2", 50, 3);
+    let dragonOrange = new Enemy(this, 50, 100, "dragonorrange", null, "Dragon2", 50, 3);
     this.add.existing(dragonOrange);
 
     // array with heroes
@@ -280,13 +133,13 @@ export default class GameScene extends Phaser.Scene {
 
   // check for game over or victory
   checkEndBattle() {
-    var victory = true;
+    let victory = true;
     // if all enemies are dead we have victory
     for (var i = 0; i < this.enemies.length; i++) {
       if (this.enemies[i].living)
         victory = false;
     }
-    var gameOver = true;
+    let gameOver = true;
     // if all heroes are dead we have game over
     for (var i = 0; i < this.heroes.length; i++) {
       if (this.heroes[i].living)
@@ -308,13 +161,14 @@ export default class GameScene extends Phaser.Scene {
     // clear state, remove sprites
     this.heroes.length = 0;
     this.enemies.length = 0;
-    for (var i = 0; i < this.units.length; i++) {
+    for (let i = 0; i < this.units.length; i++) {
       // link item
       this.units[i].destroy();
     }
     this.units.length = 0;
     // sleep the UI
     this.scene.sleep('UI');
+    gameState.dragons += 2
     // return to WorldScene and sleep current BattleScene
     this.scene.switch('Game');
   }
