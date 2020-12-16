@@ -1,4 +1,5 @@
 import 'phaser';
+import gameState from '../state/GameState'
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -7,14 +8,15 @@ export default class GameScene extends Phaser.Scene {
 
   create() {
     // create the map
-    var map = this.make.tilemap({ key: 'map' });
+    const map = this.make.tilemap({ key: 'map' });
 
     // first parameter is the name of the tilemap in tiled
-    var tiles = map.addTilesetImage('spritesheet', 'tiles');
+    const tiles = map.addTilesetImage('spritesheet', 'tiles');
 
     // creating the layers
-    var grass = map.createStaticLayer('Grass', tiles, 0, 0);
-    var obstacles = map.createStaticLayer('Obstacles', tiles, 0, 0);
+    const grass = map.createStaticLayer('Grass', tiles, 0, 0);
+    const obstacles = map.createStaticLayer('Obstacles', tiles, 0, 0);
+
 
     // make all tiles in obstacles collidable
     obstacles.setCollisionByExclusion([-1]);
@@ -36,13 +38,13 @@ export default class GameScene extends Phaser.Scene {
     });
     this.anims.create({
       key: 'up',
-      frames: this.anims.generateFrameNumbers('player', { frames: [1, 2, 3, 4] }),
+      frames: this.anims.generateFrameNumbers('player', { frames: [0, 1, 2, 3, 4, 5] }),
       frameRate: 8,
       repeat: -1
     });
     this.anims.create({
       key: 'down',
-      frames: this.anims.generateFrameNumbers('player', { frames: [5, 6, 7, 8] }),
+      frames: this.anims.generateFrameNumbers('player', { frames: [0, 1, 2, 3, 4, 5] }),
       frameRate: 8,
       repeat: -1
     });
@@ -66,11 +68,25 @@ export default class GameScene extends Phaser.Scene {
     // user input
     this.cursors = this.input.keyboard.createCursorKeys();
 
+    // collectibles
+    this.swords = this.physics.add.group()
+
+    for (let i = 0; i < 3; i += 1) {
+      let x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
+      let y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
+
+      this.swords.create(x, y, 'sword').setScale(0.3)
+    }
+
+    this.physics.add.overlap(this.player, this.swords, this.onGatherSword, false, this)
+
+
+
     // where the enemies will be
     this.spawns = this.physics.add.group({ classType: Phaser.GameObjects.Zone });
-    for (var i = 0; i < 2; i++) {
-      var x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
-      var y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
+    for (let i = 0; i < 15; i += 1) {
+      let x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
+      let y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
       // parameters are x, y, width, height
       this.spawns.create(x, y, 20, 20);
     }
@@ -78,6 +94,33 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.overlap(this.player, this.spawns, this.onMeetEnemy, false, this);
     // we listen for 'wake' event
     this.sys.events.on('wake', this.wake, this);
+
+    gameState.swords = 0
+    gameState.dragons = 0
+
+    this.dragonScore = this.add.text(this.physics.world.bounds.width - 140, 5, `Dragons Slayn: ${gameState.dragons}`, {
+      font: '15px Arial',
+      fill: '#ffffff',
+      padding: { x: 10, y: 10 },
+
+    }).setScrollFactor(0)
+
+    this.swordPower = this.add.text(this.physics.world.bounds.width - 140, 25, `Power Swords: ${gameState.swords}`, {
+      font: '15px Arial',
+      fill: '#ffffff',
+      padding: { x: 10, y: 10 },
+
+    }).setScrollFactor(0)
+
+  }
+
+  onGatherSword(player, sword) {
+    this.cameras.main.shake(300);
+
+    gameState.swords += 1
+    this.swordPower.setText(`Power Swords: ${gameState.swords}`)
+    sword.x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
+    sword.y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
   }
 
   wake() {
@@ -97,7 +140,7 @@ export default class GameScene extends Phaser.Scene {
 
     this.input.stopPropagation();
     // start battle 
-    this.scene.switch('BattleScene');
+    this.scene.switch('Battle');
   }
 
   update(time, delta) {
@@ -136,5 +179,8 @@ export default class GameScene extends Phaser.Scene {
     else {
       this.player.anims.stop();
     }
+
+    this.dragonScore.setText(`Dragons Slayn: ${gameState.dragons}`)
+    this.swordPower.setText(`Power Swords: ${gameState.swords}`)
   }
 }; 

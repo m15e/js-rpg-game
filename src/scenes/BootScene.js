@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 
+
 export default class BootScene extends Phaser.Scene {
   constructor() {
     super('Boot');
@@ -16,7 +17,8 @@ export default class BootScene extends Phaser.Scene {
     // our two characters
     this.load.spritesheet('player', 'src/assets/run_hero.png', { frameWidth: 50, frameHeight: 37 });
 
-
+    // swords
+    this.load.image('sword', 'src/assets/swordquest.png');
   }
 
   create() {
