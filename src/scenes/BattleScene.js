@@ -11,7 +11,7 @@ let Unit = new Phaser.Class({
       Phaser.GameObjects.Sprite.call(this, scene, x, y, texture, frame)
       this.type = type;
       this.maxHp = this.hp = hp;
-      this.damage = gameState.damage; // default damage     
+      this.damage = (gameState.swords * 15) + 50; // default damage     
       this.living = true;
       this.menuItem = null;
     },
@@ -82,10 +82,13 @@ export default class GameScene extends Phaser.Scene {
     let mage = new PlayerCharacter(this, 250, 100, "player", 4, "Mage", 80, 8);
     this.add.existing(mage);
 
-    let dragonblue = new Enemy(this, 50, 50, "dragonblue", null, "Dragon", 50, 3);
+    let dragonRage = gameState.dragons * 25 + 15
+    let dragonHeart = gameState.dragons * 25 + 100
+
+    let dragonblue = new Enemy(this, 50, 50, "dragonblue", null, "Dragon", dragonHeart, dragonRage);
     this.add.existing(dragonblue);
 
-    let dragonOrange = new Enemy(this, 50, 100, "dragonorrange", null, "Dragon2", 50, 3);
+    let dragonOrange = new Enemy(this, 50, 100, "dragonorrange", null, "Dragon2", dragonHeart, dragonRage);
     this.add.existing(dragonOrange);
 
     // array with heroes
