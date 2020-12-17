@@ -29,12 +29,12 @@ export default class OptionsScene extends Phaser.Scene {
   create() {
     this.model = this.sys.game.globals.model
 
-    this.text = this.add.text(300, 100, 'Options', { fontSize: 40 });
-    this.musicButton = this.add.image(200, 200, 'checkedBox');
-    this.musicText = this.add.text(250, 190, 'Music Enabled', { fontSize: 24 });
+    this.text = this.add.text(120, 10, 'Options', { fontSize: 20 });
+    this.musicButton = this.add.image(100, 70, 'checkedBox');
+    this.musicText = this.add.text(130, 65, 'Music Enabled', { fontSize: 14 });
 
-    this.soundButton = this.add.image(200, 300, 'checkedBox');
-    this.soundText = this.add.text(250, 290, 'Sound Enabled', { fontSize: 24 });
+    this.soundButton = this.add.image(100, 110, 'checkedBox');
+    this.soundText = this.add.text(130, 100, 'Sound Enabled', { fontSize: 14 });
 
     this.musicButton.setInteractive();
     this.soundButton.setInteractive();

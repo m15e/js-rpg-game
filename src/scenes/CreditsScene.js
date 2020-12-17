@@ -10,8 +10,8 @@ export default class CreditsScene extends Phaser.Scene {
   }
 
   create() {
-    this.creditsText = this.add.text(0, 0, 'Credits', { fontSize: '32px', fill: '#fff' });
-    this.madeByText = this.add.text(0, 0, 'Created By: Placeholder', { fontSize: '26px', fill: '#fff' });
+    this.creditsText = this.add.text(0, 0, 'All Good Things Come To An End', { fontSize: '14px', fill: '#fff' });
+    this.madeByText = this.add.text(0, 0, 'LeaderBoard', { fontSize: '14px', fill: '#fff' });
     this.zone = this.add.zone(config.width / 2, config.height / 2, config.width, config.height);
 
     Phaser.Display.Align.In.Center(
@@ -39,7 +39,7 @@ export default class CreditsScene extends Phaser.Scene {
 
     this.madeByTween = this.tweens.add({
       targets: this.madeByText,
-      y: -300,
+      y: -100,
       ease: 'Power1',
       duration: 8000,
       delay: 1000,
