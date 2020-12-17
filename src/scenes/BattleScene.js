@@ -75,14 +75,14 @@ export default class GameScene extends Phaser.Scene {
 
   startBattle() {
     // player character - warrior
-    let hero = new PlayerCharacter(this, 250, 50, "player", 1, "Hero", gameState.life, 20);
+    let hero = new PlayerCharacter(this, 250, 50, "player", 1, "Hero", gameState.life, 200);
     this.add.existing(hero);
 
     // player character - mage
-    let mage = new PlayerCharacter(this, 250, 100, "player", 4, "Mage", 200, 8);
+    let mage = new PlayerCharacter(this, 250, 100, "player", 4, "Mage", 200, 200);
     this.add.existing(mage);
 
-    let dragonRage = gameState.dragons * 25 + 1500
+    let dragonRage = gameState.dragons * 25 + 100
     let dragonHeart = gameState.dragons * 25 + 100
 
     let dragonblue = new Enemy(this, 50, 50, "dragonblue", null, "Dragon", dragonHeart, dragonRage);
@@ -103,7 +103,7 @@ export default class GameScene extends Phaser.Scene {
     this.scene.run("UI");
   }
 
-  nextTurn(hero) {
+  nextTurn() {
     // if we have victory or game over
     if (this.checkEndBattle()) {
       this.endBattle();
@@ -130,7 +130,7 @@ export default class GameScene extends Phaser.Scene {
       // call the enemy's attack function 
       this.units[this.index].attack(this.heroes[r]);
       // add timer for the next turn, so will have smooth gameplay
-      this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
+      this.time.addEvent({ delay: 1000, callback: this.nextTurn, callbackScope: this });
     }
   }
 
@@ -149,10 +149,10 @@ export default class GameScene extends Phaser.Scene {
         gameOver = false;
     }
     if (gameOver === true) {
-      this.physics.pause()
-      this.add.text(180, 250, 'Game Over', { fontSize: '15px', fill: '#000000' });
-      //this.scene.switch('Title')
+      gameState.active = false
+      this.endBattle()
     }
+
     return victory || gameOver;
   }
 
@@ -162,10 +162,16 @@ export default class GameScene extends Phaser.Scene {
       this.units[this.index].attack(this.enemies[target]);
     }
     // next turn in 3 seconds
-    this.time.addEvent({ delay: 3000, callback: this.nextTurn, callbackScope: this });
+    this.time.addEvent({ delay: 1000, callback: this.nextTurn, callbackScope: this });
   }
 
   endBattle() {
+    if (gameState.active === false) {
+      this.scene.sleep('UI')
+      this.scene.sleep('Game')
+      this.scene.switch('Credits')
+      return
+    }
     // clear state, remove sprites
     this.heroes.length = 0;
     this.enemies.length = 0;

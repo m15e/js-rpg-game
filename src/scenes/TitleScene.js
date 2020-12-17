@@ -28,6 +28,6 @@ export default class TitleScene extends Phaser.Scene {
       this.model.bgMusicPlaying = true;
       this.sys.game.globals.bgMusic = this.bgMusic;
     }
-    this.scene.start('Game')
+    //this.scene.start('Game')
   }
 };
