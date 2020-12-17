@@ -184,16 +184,6 @@ export default class UIScene extends Phaser.Scene {
     super('UI');
   }
 
-
-
-
-
-
-
-
-
-
-
   create() {
     // draw some background for the menu
     this.graphics = this.add.graphics();

@@ -11,7 +11,7 @@ let Unit = new Phaser.Class({
       Phaser.GameObjects.Sprite.call(this, scene, x, y, texture, frame)
       this.type = type;
       this.maxHp = this.hp = hp;
-      this.damage = (gameState.swords * 15) + 50; // default damage     
+      this.damage = (gameState.swords * 15) + damage; // default damage     
       this.living = true;
       this.menuItem = null;
     },
@@ -75,14 +75,14 @@ export default class GameScene extends Phaser.Scene {
 
   startBattle() {
     // player character - warrior
-    let warrior = new PlayerCharacter(this, 250, 50, "player", 1, "Warrior", 100, 20);
-    this.add.existing(warrior);
+    let hero = new PlayerCharacter(this, 250, 50, "player", 1, "Hero", gameState.life, 20);
+    this.add.existing(hero);
 
     // player character - mage
-    let mage = new PlayerCharacter(this, 250, 100, "player", 4, "Mage", 80, 8);
+    let mage = new PlayerCharacter(this, 250, 100, "player", 4, "Mage", 200, 8);
     this.add.existing(mage);
 
-    let dragonRage = gameState.dragons * 25 + 15
+    let dragonRage = gameState.dragons * 25 + 1500
     let dragonHeart = gameState.dragons * 25 + 100
 
     let dragonblue = new Enemy(this, 50, 50, "dragonblue", null, "Dragon", dragonHeart, dragonRage);
@@ -92,7 +92,7 @@ export default class GameScene extends Phaser.Scene {
     this.add.existing(dragonOrange);
 
     // array with heroes
-    this.heroes = [warrior, mage];
+    this.heroes = [hero, mage];
     // array with enemies
     this.enemies = [dragonblue, dragonOrange];
     // array with both parties, who will attack
@@ -103,7 +103,7 @@ export default class GameScene extends Phaser.Scene {
     this.scene.run("UI");
   }
 
-  nextTurn() {
+  nextTurn(hero) {
     // if we have victory or game over
     if (this.checkEndBattle()) {
       this.endBattle();
@@ -111,7 +111,7 @@ export default class GameScene extends Phaser.Scene {
     }
     do {
       // currently active unit
-      this.index++;
+      this.index += 1;
       // if there are no more units, we start again from the first one
       if (this.index >= this.units.length) {
         this.index = 0;
@@ -123,7 +123,7 @@ export default class GameScene extends Phaser.Scene {
       this.events.emit("PlayerSelect", this.index);
     } else { // else if its enemy unit
       // pick random living hero to be attacked
-      var r;
+      let r;
       do {
         r = Math.floor(Math.random() * this.heroes.length);
       } while (!this.heroes[r].living)
@@ -138,15 +138,20 @@ export default class GameScene extends Phaser.Scene {
   checkEndBattle() {
     let victory = true;
     // if all enemies are dead we have victory
-    for (var i = 0; i < this.enemies.length; i++) {
+    for (let i = 0; i < this.enemies.length; i += 1) {
       if (this.enemies[i].living)
         victory = false;
     }
     let gameOver = true;
     // if all heroes are dead we have game over
-    for (var i = 0; i < this.heroes.length; i++) {
+    for (let i = 0; i < this.heroes.length; i += 1) {
       if (this.heroes[i].living)
         gameOver = false;
+    }
+    if (gameOver === true) {
+      this.physics.pause()
+      this.add.text(180, 250, 'Game Over', { fontSize: '15px', fill: '#000000' });
+      //this.scene.switch('Title')
     }
     return victory || gameOver;
   }

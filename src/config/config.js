@@ -5,7 +5,7 @@ export default {
   parent: 'phaser-example',
   width: 320,
   height: 240,
-  zoom: 1.5,
+  zoom: 2.5,
   pixelart: true,
   physics: {
     default: 'arcade',

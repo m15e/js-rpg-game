@@ -7,7 +7,7 @@ export default class BootScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('logo', 'src/assets/logo.png');
+    this.load.image('logo', 'src/assets/logo.jpg');
     // map tiles
     this.load.image('tiles', 'src/assets/map/spritesheet.png');
 
