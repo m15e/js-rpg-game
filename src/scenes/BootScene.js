@@ -23,6 +23,9 @@ export default class BootScene extends Phaser.Scene {
     // dragons
     this.load.image('dragonblue', 'src/assets/dragonblue.png')
     this.load.image('dragonorrange', 'src/assets/dragonorrange.png')
+
+
+    this.load.audio('bgMusic', 'src/assets/TownTheme.mp3');
   }
 
   create() {

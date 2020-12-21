@@ -31,6 +31,8 @@ export default class PreloaderScene extends Phaser.Scene {
     });
     loadingText.setOrigin(0.5, 0.5);
 
+    this.cameras.main.setZoom(0)
+
     const percentText = this.make.text({
       x: width / 2,
       y: height / 2 - 5,
@@ -83,7 +85,7 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.image('blueButton2', 'src/assets/ui/blue_button03.png');
     this.load.image('box', 'src/assets/ui/grey_box.png');
     this.load.image('checkedBox', 'src/assets/ui/blue_boxCheckmark.png');
-    this.load.audio('bgMusic', ['src/assets/TownTheme.mp3']);
+    this.load.audio('bgMusic', 'src/assets/TownTheme.mp3');
   }
 
   ready() {

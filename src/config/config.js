@@ -5,6 +5,9 @@ export default {
   parent: 'phaser-example',
   width: 320,
   height: 240,
+  dom: {
+    createContainer: true
+  },
   zoom: 2.5,
   pixelart: true,
   physics: {
