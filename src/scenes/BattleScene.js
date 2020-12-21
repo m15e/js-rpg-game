@@ -169,7 +169,7 @@ export default class GameScene extends Phaser.Scene {
     if (gameState.active === false) {
       this.scene.sleep('UI')
       this.scene.sleep('Game')
-      this.scene.switch('Credits')
+      this.scene.switch('Score')
       return
     }
     // clear state, remove sprites

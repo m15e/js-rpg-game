@@ -7,7 +7,7 @@ export default class BootScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('logo', 'src/assets/logo.jpg');
+
     // map tiles
     this.load.image('tiles', 'src/assets/map/spritesheet.png');
 
@@ -26,6 +26,6 @@ export default class BootScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start('Preloader');
+    this.scene.start('Score');
   }
 };

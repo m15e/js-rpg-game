@@ -1,55 +1,73 @@
-# Phaser 3 Webpack Project Template
+# JS-RPG-Game DragonSwords
+> An open-world turn-based RPG built with Phaser 3.
 
-A Phaser 3 project template with ES6 support via [Babel 7](https://babeljs.io/) and [Webpack 4](https://webpack.js.org/)
-that includes hot-reloading for development and production-ready builds.
+## Prologue
 
-Loading images via JavaScript module `import` is also supported.
-
-## Requirements
-
-[Node.js](https://nodejs.org) is required to install dependencies and run scripts via `npm`.
-
-## Available Commands
-
-| Command | Description |
-|---------|-------------|
-| `npm install` | Install project dependencies |
-| `npm start` | Build project and open web server running project |
-| `npm run build` | Builds code bundle with production settings (minification, uglification, etc..) |
-
-## Writing Code
-
-After cloning the repo, run `npm install` from your project directory. Then, you can start the local development
-server by running `npm start`.
+Once upon a time in a world long forgotten, a hero has risen to cleanse the world of the horrendous dragons. Embark on a quest to gain power with your mage companion.
+Collect swords to get ever stronger and claim your place as the dragon slayer master...
 
 
-After starting the development server with `npm start`, you can edit any files in the `src` folder
-and webpack will automatically recompile and reload your server (available at `http://localhost:8080`
-by default).
+## Screenshot
 
-## Customizing the Template
+![](./screenshots/screenshot.png)
 
-### Babel
-You can write modern ES6+ JavaScript and Babel will transpile it to a version of JavaScript that you
-want your project to support. The targeted browsers are set in the `.babelrc` file and the default currently
-targets all browsers with total usage over "0.25%" but excludes IE11 and Opera Mini.
+## How it works
 
-  ```
-  "browsers": [
-    ">0.25%",
-    "not ie 11",
-    "not op_mini all"
-  ]
-  ```
+1. You start in a 2D open world that you are free to roam
+2. You can collect swoards to boost your hero's attack power
+3. The goal is to collect swords and hunt dragons which will appear randomly on the map
+4. Complete with other players online, hunt dragons to get the highest slay count 
 
-### Webpack
-If you want to customize your build, such as adding a new webpack loader or plugin (i.e. for loading CSS or fonts), you can
-modify the `webpack/base.js` file for cross-project changes, or you can modify and/or create
-new configuration files and target them in specific npm tasks inside of `package.json'.
 
-## Deploying Code
-After you run the `npm run build` command, your code will be built into a single bundle located at 
-`dist/bundle.min.js` along with any other assets you project depended. 
+## How to play the game?
 
-If you put the contents of the `dist` folder in a publicly-accessible location (say something like `http://mycoolserver.com`), 
-you should be able to open `http://mycoolserver.com/index.html` and play your game.
+- Move up with `up arrow`
+- Move down with `down arrow`
+- Move right with `right arrow`
+- Move left with `left arrow`
+- Attack with `left arrow`
+
+
+## Built With
+
+- Phaser 3
+- HTML/CSS
+- Javascript
+- Webpack
+
+## Live Demo
+
+- [Click to launch demo](https://missing-link.com)
+
+## How to run this project on your local machine
+
+### Prerequisites
+1. An internet browser
+1. npm
+1. Phaser
+
+   
+### Steps to follow
+1. Clone the repository to your local machine using `git clone https://github.com/m15e/js-rpg-game.git`
+1. On your local machine, navigate to the folder using `cd js-rpg-game` in your terminal.
+1. Run `npm install` for installing all the dependencies.
+1. Run `npm run start` to run the game on your local webserver.
+1. Visit `http://localhost:8080/` to play the game from your browser.
+
+### Testing the game
+
+1. Run `npm test` to run the tests
+
+
+## Author 
+
+👤 **Mark Rode**
+
+- Github: [@m15e](https://github.com/m15e)
+
+
+## Show your support
+
+Give a ⭐️ if you like this project!
+
+## Acknowledgments

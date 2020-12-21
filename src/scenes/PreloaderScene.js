@@ -10,10 +10,6 @@ export default class PreloaderScene extends Phaser.Scene {
   }
 
   preload() {
-    // add logo image
-    const bg = this.add.sprite(0, 0, 'logo')
-    bg.width = 320
-    bg.height = 240
 
 
     // display progress bar
@@ -85,7 +81,6 @@ export default class PreloaderScene extends Phaser.Scene {
     // load assets needed in our game
     this.load.image('blueButton1', 'src/assets/ui/blue_button02.png');
     this.load.image('blueButton2', 'src/assets/ui/blue_button03.png');
-    this.load.image('phaserLogo', 'src/assets/logo.png');
     this.load.image('box', 'src/assets/ui/grey_box.png');
     this.load.image('checkedBox', 'src/assets/ui/blue_boxCheckmark.png');
     this.load.audio('bgMusic', ['src/assets/TownTheme.mp3']);
