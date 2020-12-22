@@ -1,13 +1,11 @@
 import Phaser from 'phaser';
 
-
 export default class BootScene extends Phaser.Scene {
   constructor() {
     super('Boot');
   }
 
   preload() {
-
     // map tiles
     this.load.image('tiles', 'src/assets/map/spritesheet.png');
 
@@ -21,14 +19,13 @@ export default class BootScene extends Phaser.Scene {
     this.load.image('sword', 'src/assets/swordquest.png');
 
     // dragons
-    this.load.image('dragonblue', 'src/assets/dragonblue.png')
-    this.load.image('dragonorrange', 'src/assets/dragonorrange.png')
-
+    this.load.image('dragonblue', 'src/assets/dragonblue.png');
+    this.load.image('dragonorrange', 'src/assets/dragonorrange.png');
 
     this.load.audio('bgMusic', 'src/assets/TownTheme.mp3');
   }
 
   create() {
-    this.scene.start('Preloader');
+    this.scene.start('Title');
   }
-};
+}

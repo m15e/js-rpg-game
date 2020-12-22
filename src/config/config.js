@@ -6,7 +6,7 @@ export default {
   width: 320,
   height: 240,
   dom: {
-    createContainer: true
+    createContainer: true,
   },
   zoom: 2.5,
   pixelart: true,
@@ -14,7 +14,6 @@ export default {
     default: 'arcade',
     arcade: {
       gravity: { y: 0 },
-      //debug: true
-    }
+    },
   },
-}
+};

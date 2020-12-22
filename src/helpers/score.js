@@ -1,7 +1,7 @@
 const sendScore = async (user, score) => {
   try {
     const data = { user, score };
-    let apiURL = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/tB4vCeH1M2zdNORMm4cr/scores'
+    const apiURL = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/tB4vCeH1M2zdNORMm4cr/scores';
     await fetch(apiURL, {
       method: 'POST',
       headers: {

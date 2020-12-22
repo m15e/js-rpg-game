@@ -11,8 +11,6 @@ import ScoreScene from './scenes/ScoreScene';
 import RankingScene from './scenes/RankingScene';
 import Model from './Model';
 
-
-
 class Game extends Phaser.Game {
   constructor() {
     super(config);

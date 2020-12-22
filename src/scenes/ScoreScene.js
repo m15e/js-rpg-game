@@ -8,55 +8,42 @@ export default class ScoreScene extends Phaser.Scene {
     super('Score');
   }
 
-  preload() {
-  }
-
   create() {
-
     this.endText = this.add.text(0, 0, 'Game Over :(', { fontSize: '10px', fill: '#fff' });
-    this.dragonsSlaynText = this.add.text(0, 0, `You have slayn ${gameState.dragons} dragons`)
+    this.dragonsSlaynText = this.add.text(0, 0, `You have slayn ${gameState.dragons} dragons`);
 
     this.zone = this.add.zone(config.width / 2,
       config.height / 2, config.width, config.height);
-    this.playerText = this.add.text(50, 15, 'Enter your name to save your score!', { fontSize: '10px', fill: '#fff' })
+    this.playerText = this.add.text(50, 15, 'Enter your name to save your score!', { fontSize: '10px', fill: '#fff' });
 
     Phaser.Display.Align.In.Center(
       this.endText,
-      this.zone
+      this.zone,
     );
 
     Phaser.Display.Align.In.Center(
       this.playerText,
-      this.zone
+      this.zone,
     );
-
 
     Phaser.Display.Align.In.Center(
       this.dragonsSlaynText,
-      this.zone
+      this.zone,
     );
 
-
-    this.endText.setY(15)
+    this.endText.setY(15);
     this.dragonsSlaynText.setY(40);
-    this.playerText.setY(60)
-
-
+    this.playerText.setY(60);
 
     this.add.dom(config.width / 2, 100, 'input', 'background-color: white; border: 1px solid #fff; width: 150px; height: 20px; font: 14px Arial');
     this.add.dom(config.width / 2, 140, 'button', 'background-color: #00b3ff; color: #fff; border: 1px solid #fff; width: 80px; height: 20px; font: 12px Arial', 'Send');
 
-
-
-
-
     const nameSend = document.querySelector('button');
 
-    nameSend.addEventListener('click', (e) => {
-      const name = document.querySelector('input').value
-      sendScore(name, gameState.dragons)
-      this.scene.switch('Title')
-    })
-
+    nameSend.addEventListener('click', () => {
+      const name = document.querySelector('input').value;
+      sendScore(name, gameState.dragons);
+      this.scene.switch('Title');
+    });
   }
-};
+}
