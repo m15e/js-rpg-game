@@ -29,6 +29,6 @@ export default class BootScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start('Score');
+    this.scene.start('Title');
   }
 };
