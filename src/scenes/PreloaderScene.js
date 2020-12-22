@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import config from '../config/config'
 
 export default class PreloaderScene extends Phaser.Scene {
   constructor() {
@@ -16,7 +17,7 @@ export default class PreloaderScene extends Phaser.Scene {
     const progressBar = this.add.graphics();
     const progressBox = this.add.graphics();
     progressBox.fillStyle(0x222222, 0.8);
-    progressBox.fillRect(240, 270, 320, 50);
+    progressBox.fillRect(240, 270, config.width / 2, 60);
 
     const { width } = this.cameras.main;
     const { height } = this.cameras.main;
@@ -31,7 +32,7 @@ export default class PreloaderScene extends Phaser.Scene {
     });
     loadingText.setOrigin(0.5, 0.5);
 
-    this.cameras.main.setZoom(0)
+    this.cameras.main.setZoom(1)
 
     const percentText = this.make.text({
       x: width / 2,
