@@ -38,7 +38,7 @@ Collect swords to get ever stronger and claim your place as the dragon slayer ma
 
 ## Live Demo
 
-- [Click to launch demo](https://missing-link.com)
+- [Click to launch demo](https://clever-neumann-d7458b.netlify.app/)
 
 ## How to run this project on your local machine
 
