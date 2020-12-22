@@ -7,9 +7,10 @@ Once upon a time in a world long forgotten, a hero has risen to cleanse the worl
 Collect swords to get ever stronger and claim your place as the dragon slayer master...
 
 
-## Screenshot
+## Screenshots
 
-![](./screenshots/screenshot.png)
+![](./screenshots/screenshot1.png)
+![](./screenshots/screenshot2.png)
 
 ## How it works
 
