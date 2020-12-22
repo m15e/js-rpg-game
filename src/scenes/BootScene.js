@@ -15,7 +15,7 @@ export default class BootScene extends Phaser.Scene {
     // our hero
     this.load.spritesheet('player', 'src/assets/run_hero.png', { frameWidth: 50, frameHeight: 37 });
 
-    // character sprite    
+    // character sprite
     this.load.spritesheet('magi', 'src/assets/RPG_assets.png', { frameWidth: 16, frameHeight: 16 });
 
     // swords
