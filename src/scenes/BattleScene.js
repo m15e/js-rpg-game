@@ -86,7 +86,7 @@ export default class GameScene extends Phaser.Scene {
     this.add.existing(mage);
 
     const dragonRage = gameState.dragons * 10 + 6000;
-    const dragonHeart = gameState.dragons * 30 + 6000;
+    const dragonHeart = gameState.dragons * 30 + 1000;
 
     const dragonblue = new Enemy(this, 50, 50, 'dragonblue', null, 'Drogol', dragonHeart, dragonRage);
     this.add.existing(dragonblue);

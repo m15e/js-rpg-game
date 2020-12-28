@@ -92,7 +92,6 @@ export default class GameScene extends Phaser.Scene {
     // we listen for 'wake' event
     this.sys.events.on('wake', this.wake, this);
 
-
     this.dragonScore = this.add.text(this.physics.world.bounds.width / 2 - 25, 5, `Dragons Slayn: ${gameState.dragons}`, {
       font: '10px Arial',
       fill: '#ffffff',
