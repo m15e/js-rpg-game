@@ -13,7 +13,6 @@ export default {
   physics: {
     default: 'arcade',
     arcade: {
-      debug: true,
       gravity: { y: 0 },
     },
   },

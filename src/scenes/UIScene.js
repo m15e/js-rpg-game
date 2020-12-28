@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import config from '../config/config';
 
 const Message = new Phaser.Class({
 
@@ -184,6 +185,9 @@ export default class UIScene extends Phaser.Scene {
   }
 
   create() {
+    // in game instructions
+    this.hintText = this.add.text(config.width / 4 + 7, 3, 'HINT - Press SPACE to Attack', { fontSize: '9px', fill: '#fff' });
+
     // draw some background for the menu
     this.graphics = this.add.graphics();
     this.graphics.lineStyle(1, 0xffffff);

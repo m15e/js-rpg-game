@@ -78,15 +78,15 @@ export default class GameScene extends Phaser.Scene {
 
   startBattle() {
     // player character - warrior
-    const hero = new PlayerCharacter(this, 250, 50, 'player', 1, 'Hero', gameState.life, 125 + (gameState.swords * 25));
+    const hero = new PlayerCharacter(this, 250, 50, 'player', 1, 'Hero', gameState.life, 125 + (gameState.swords * 15));
     this.add.existing(hero);
 
     // player character - mage
-    const mage = new PlayerCharacter(this, 250, 100, 'magi', 4, 'Mage', 200, 100 + (gameState.swords * 15));
+    const mage = new PlayerCharacter(this, 250, 100, 'magi', 4, 'Mage', 300, 100 + (gameState.swords * 10));
     this.add.existing(mage);
 
-    const dragonRage = gameState.dragons * 10 + 6000;
-    const dragonHeart = gameState.dragons * 30 + 1000;
+    const dragonRage = gameState.dragons * 10 + 60;
+    const dragonHeart = gameState.dragons * 60 + 80;
 
     const dragonblue = new Enemy(this, 50, 50, 'dragonblue', null, 'Drogol', dragonHeart, dragonRage);
     this.add.existing(dragonblue);
