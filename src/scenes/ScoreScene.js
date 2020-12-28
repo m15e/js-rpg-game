@@ -40,10 +40,20 @@ export default class ScoreScene extends Phaser.Scene {
 
     const nameSend = document.querySelector('button');
 
+
     nameSend.addEventListener('click', () => {
-      const name = document.querySelector('input').value;
-      sendScore(name, gameState.dragons);
+      let name = document.querySelector('input')
+      sendScore(name.value.toString(), gameState.dragons);
+      console.log(name.value.toString(), gameState.dragons);
+      name.value = '';
+      gameState.active = false;
+      gameState.dragons = 0;
+      gameState.swords = 0;
+      gameState.life = 200;
+      this.scene.restart('Game');
+      this.scene.sleep('Game');
       this.scene.switch('Title');
     });
   }
+
 }

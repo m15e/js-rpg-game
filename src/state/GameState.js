@@ -1,6 +1,6 @@
 export default {
-  dragons: 0,
-  life: 100,
+  dragons: 20,
+  life: 200,
   swords: 0,
   active: true,
 };

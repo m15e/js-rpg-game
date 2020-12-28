@@ -92,8 +92,6 @@ export default class GameScene extends Phaser.Scene {
     // we listen for 'wake' event
     this.sys.events.on('wake', this.wake, this);
 
-    gameState.swords = 0;
-    gameState.dragons = 0;
 
     this.dragonScore = this.add.text(this.physics.world.bounds.width / 2 - 25, 5, `Dragons Slayn: ${gameState.dragons}`, {
       font: '10px Arial',
@@ -108,6 +106,8 @@ export default class GameScene extends Phaser.Scene {
       padding: { x: 10, y: 10 },
 
     }).setScrollFactor(0);
+
+    this.player.body.setVelocity(0);
   }
 
   onGatherSword(player, sword) {
@@ -135,6 +135,7 @@ export default class GameScene extends Phaser.Scene {
     this.cameras.main.shake(300);
 
     this.input.stopPropagation();
+    this.wake();
     // start battle
     this.scene.switch('Battle');
   }
