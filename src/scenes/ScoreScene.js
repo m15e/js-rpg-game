@@ -8,6 +8,7 @@ export default class ScoreScene extends Phaser.Scene {
     super('Score');
   }
 
+
   create() {
     this.endText = this.add.text(0, 0, 'Game Over :(', { fontSize: '10px', fill: '#fff' });
     this.dragonsSlaynText = this.add.text(0, 0, `You have slayn ${gameState.dragons} dragons`);
@@ -38,22 +39,20 @@ export default class ScoreScene extends Phaser.Scene {
     this.add.dom(config.width / 2, 100, 'input', 'background-color: white; border: 1px solid #fff; width: 150px; height: 20px; font: 14px Arial');
     this.add.dom(config.width / 2, 140, 'button', 'background-color: #00b3ff; color: #fff; border: 1px solid #fff; width: 80px; height: 20px; font: 12px Arial', 'Send');
 
-    const nameSend = document.querySelector('button');
+    let nameSend = document.querySelector('button');
 
-
-    nameSend.addEventListener('click', () => {
+    nameSend.onclick = () => {
       let name = document.querySelector('input')
       sendScore(name.value.toString(), gameState.dragons);
       console.log(name.value.toString(), gameState.dragons);
       name.value = '';
       gameState.active = false;
-      gameState.dragons = 0;
+      gameState.dragons = 5;
       gameState.swords = 0;
       gameState.life = 200;
       this.scene.restart('Game');
       this.scene.sleep('Game');
       this.scene.switch('Title');
-    });
+    }
   }
-
 }

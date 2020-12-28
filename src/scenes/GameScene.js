@@ -81,7 +81,7 @@ export default class GameScene extends Phaser.Scene {
 
     // where the enemies will be
     this.spawns = this.physics.add.group({ classType: Phaser.GameObjects.Zone });
-    for (let i = 0; i < 15; i += 1) {
+    for (let i = 0; i < 10; i += 1) {
       const x = Phaser.Math.RND.between(0, this.physics.world.bounds.width);
       const y = Phaser.Math.RND.between(0, this.physics.world.bounds.height);
       // parameters are x, y, width, height
@@ -120,6 +120,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   wake() {
+    this.cursors = this.input.keyboard.createCursorKeys();
     this.cursors.left.reset();
     this.cursors.right.reset();
     this.cursors.up.reset();

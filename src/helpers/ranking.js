@@ -1,7 +1,9 @@
 const getRanking = async () => {
-  const apiURL = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/tB4vCeH1M2zdNORMm4cr/scores';
+  const apiURL = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/ykIVWSf8mzelJkl6Eb5b/scores';
   try {
-    let res = await fetch(apiURL);
+    let res = await fetch(apiURL, {
+      mode: 'cors',
+    });
     res = await res.json();
     return res;
   } catch {
