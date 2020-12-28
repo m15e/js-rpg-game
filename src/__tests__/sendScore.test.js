@@ -1,5 +1,5 @@
-import sendScore from '../helpers/score';
 import axios from 'axios';
+import sendScore from '../helpers/score';
 
 jest.mock('axios');
 
@@ -33,6 +33,4 @@ describe('Test sendScore function', () => {
     const res = await sendScore('test', 'hello');
     expect(res.message).toEqual('You need to provide a valid score for the leaderboard');
   });
-
-
 });
